@@ -1,0 +1,2 @@
+Django>=1.5.1
+git+git://github.com/596acres/django-livinglots-mailsender/@3f28193dd
