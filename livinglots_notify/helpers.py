@@ -7,7 +7,7 @@ from .mail import mail_facilitators
 
 def notify_managers(obj):
     obj_model_name = obj._meta.object_name.lower()
-    template_dir = 'notify'
+    template_dir = 'livinglots/notify'
     subject_template_name = '%s/managers_new_%s_subject.txt' % (template_dir,
                                                                 obj_model_name)
     text_template_name = '%s/managers_new_%s_text.txt' % (template_dir,
@@ -36,7 +36,7 @@ def notify_facilitators(obj):
     except Exception:
         kwargs['excluded_emails'] = []
 
-    template = ('notify/facilitators/new_%s.txt' %
+    template = ('livinglots/notify/facilitators/new_%s.txt' %
                 obj._meta.object_name.lower())
     subject = '%s updated--new %s' % (obj.content_object._meta.object_name,
                                       obj._meta.object_name)
