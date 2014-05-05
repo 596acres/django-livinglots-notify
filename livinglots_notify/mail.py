@@ -13,20 +13,19 @@ def mail_facilitators(target, subject, excluded_emails=[],
     facilitators = settings.FACILITATORS['global']
     facilitators = [f for f in facilitators if f not in excluded_emails]
 
-    messages = _get_facilitator_messages(facilitators, target, template,
-                                         **kwargs)
+    kwargs['target'] = target
+    messages = _get_facilitator_messages(facilitators, template, **kwargs)
     mail_multiple_personalized(subject, messages, fail_silently=False,
                                from_email=get_target_email_address(target))
 
 
-def _get_facilitator_messages(facilitators, target, template_name, **kwargs):
+def _get_facilitator_messages(facilitators, template_name, **kwargs):
     messages = {}
     for facilitator in facilitators:
         context = kwargs
         context.update({
             'BASE_URL': Site.objects.get_current().domain,
             'MAILREADER_REPLY_PREFIX': settings.MAILREADER_REPLY_PREFIX,
-            'target': target,
         })
         messages[facilitator] = render_to_string(template_name, context)
     return messages
