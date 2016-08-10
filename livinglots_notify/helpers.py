@@ -38,6 +38,9 @@ def notify_facilitators(obj):
 
     template = ('livinglots/notify/facilitators/new_%s.txt' %
                 obj._meta.object_name.lower())
+    html_template = ('livinglots/notify/facilitators/new_%s.html' %
+                     obj._meta.object_name.lower())
     subject = '%s updated--new %s' % (obj.content_object._meta.object_name,
                                       obj._meta.object_name)
-    mail_facilitators(target, subject, template=template, **kwargs)
+    mail_facilitators(target, subject, template=template,
+                      html_template=html_template, **kwargs)
